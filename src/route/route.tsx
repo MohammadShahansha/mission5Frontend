@@ -5,16 +5,21 @@ import SalesManagement from "../pages/user/SalesManagement";
 import SalesHistory from "../pages/user/SalesHistory";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import Home from "../pages/home/Home";
+import ProtectedRoute from "../components/layout/Protectedroute";
+// import Home from "../pages/home/Home";
 
 const router = createBrowserRouter([
+  // {
+  //   path: "/",
+  //   element: <Home />,
+  // },
   {
     path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/dashboard",
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "shoesManagement",

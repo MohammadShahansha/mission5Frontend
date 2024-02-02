@@ -5,15 +5,15 @@ const { Sider } = Layout;
 const barItems = [
   {
     key: "Shoes Management",
-    label: <NavLink to="/dashboard/shoesManagement">Shoes Management</NavLink>,
+    label: <NavLink to="shoesManagement">Shoes Management</NavLink>,
   },
   {
     key: "Sales Management",
-    label: <NavLink to="/dashboard/salesManagement">Sales Management</NavLink>,
+    label: <NavLink to="salesManagement">Sales Management</NavLink>,
   },
   {
     key: "Sales History",
-    label: <NavLink to="/dashboard/salesHistory">Sales History</NavLink>,
+    label: <NavLink to="salesHistory">Sales History</NavLink>,
   },
 ];
 
