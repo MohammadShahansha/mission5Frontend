@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 import CreateShoes from "../pages/shoes/CreateShoes";
+import ShoesManagement from "../pages/user/ShoesManagement";
 
 const router = createBrowserRouter([
   // {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "create-shoes",
         element: <CreateShoes />,
+      },
+      {
+        path: "shoes-management",
+        element: <ShoesManagement />,
       },
       {
         path: "salesManagement",

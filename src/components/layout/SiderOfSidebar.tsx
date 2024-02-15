@@ -16,6 +16,10 @@ const barItems = [
         label: <NavLink to="/user/create-shoes">Create Shoes</NavLink>,
       },
       {
+        key: "get shoes",
+        label: <NavLink to="/user/shoes-management">Shoes Management</NavLink>,
+      },
+      {
         key: "Sales Management",
         label: <NavLink to="/user/salesManagement">Sales Management</NavLink>,
       },
