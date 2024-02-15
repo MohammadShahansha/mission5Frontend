@@ -1,12 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import ShoesManagement from "../pages/user/ShoesManagement";
 import SalesManagement from "../pages/user/SalesManagement";
 import SalesHistory from "../pages/user/SalesHistory";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import ProtectedRoute from "../components/layout/Protectedroute";
-// import Home from "../pages/home/Home";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
+import CreateShoes from "../pages/shoes/CreateShoes";
 
 const router = createBrowserRouter([
   // {
@@ -20,15 +19,33 @@ const router = createBrowserRouter([
         <App />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: "/user",
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
     children: [
       {
-        path: "shoesManagement",
-        element: <ShoesManagement />,
+        path: "create-shoes",
+        element: <CreateShoes />,
       },
       {
         path: "salesManagement",
         element: <SalesManagement />,
       },
+    ],
+  },
+  {
+    path: "/user",
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
+    children: [
       {
         path: "salesHistory",
         element: <SalesHistory />,

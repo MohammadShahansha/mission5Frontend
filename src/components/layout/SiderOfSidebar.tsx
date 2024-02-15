@@ -4,13 +4,24 @@ const { Sider } = Layout;
 
 const barItems = [
   {
-    key: "Shoes Management",
-    label: <NavLink to="shoesManagement">Shoes Management</NavLink>,
+    key: "Dashboard",
+    label: "Dashboard",
   },
   {
-    key: "Sales Management",
-    label: <NavLink to="salesManagement">Sales Management</NavLink>,
+    key: "Shoes Management",
+    label: "Shoes Management",
+    children: [
+      {
+        key: "create shoes",
+        label: <NavLink to="/user/create-shoes">Create Shoes</NavLink>,
+      },
+      {
+        key: "Sales Management",
+        label: <NavLink to="/user/salesManagement">Sales Management</NavLink>,
+      },
+    ],
   },
+
   {
     key: "Sales History",
     label: <NavLink to="salesHistory">Sales History</NavLink>,
@@ -22,6 +33,7 @@ const SiderOfSidebar = () => {
     <Sider
       breakpoint="lg"
       collapsedWidth="0"
+      style={{ height: "100vh", position: "sticky", top: "0", left: "0" }}
       onBreakpoint={(broken) => {
         console.log(broken);
       }}

@@ -1,45 +1,52 @@
-import { Button } from "antd";
-import { useForm } from "react-hook-form";
+import { Button, Row } from "antd";
+import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import SHForm from "../components/form/SHForm";
+import SHInput from "../components/form/SHInput";
 
 const Login = () => {
   const Navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      userName: "SSs",
-      password: "12345",
-    },
-  });
-  const [login, { error }] = useLoginMutation();
-
-  const onSubmit = async (data) => {
-    console.log(data);
-    const userInfo = {
-      userName: data.userName,
-      password: data.password,
-    };
-    const res = await login(userInfo).unwrap();
-    const user = verifyToken(res.data.token);
-    dispatch(setUser({ user: user, token: res.data.token }));
-    Navigate("/");
+  // const { register, handleSubmit } = useForm({
+  const defaultValues = {
+    userName: "SSs",
+    password: "12345",
   };
+  const [login] = useLoginMutation();
+
+  const onSubmit = async (data: FieldValues) => {
+    console.log(data);
+    const toastId = toast.loading("Loading......");
+    try {
+      const userInfo = {
+        userName: data.userName,
+        password: data.password,
+      };
+      const res = await login(userInfo).unwrap();
+      const user = verifyToken(res.data.token);
+      dispatch(setUser({ user: user, token: res.data.token }));
+      toast.success("Logged in success", { id: toastId, duration: 2000 });
+      Navigate("/");
+    } catch (error) {
+      toast.error("Somthing went wrong", { id: toastId, duration: 2000 });
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label htmlFor="userName">User Name</label>
-        <input type="text" id="userName" {...register("userName")} />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input type="text" id="password" {...register("password")} />
-      </div>
-      <Button htmlType="submit">Login</Button>
-    </form>
+    <Row justify="center" align="middle">
+      <SHForm onSubmit={onSubmit} defaultValues={defaultValues}>
+        <SHInput type="text" name="userName" label="User Name" />
+        <SHInput type="text" name="password" label="Password" />
+        <Button htmlType="submit" className="font-medium">
+          Login
+        </Button>
+      </SHForm>
+    </Row>
   );
 };
 
