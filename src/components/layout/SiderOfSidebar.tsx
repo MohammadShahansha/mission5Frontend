@@ -27,7 +27,7 @@ const barItems = [
   },
 
   {
-    key: "Sales History",
+    key: "Sale History",
     label: <NavLink to="salesHistory">Sales History</NavLink>,
   },
 ];

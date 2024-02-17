@@ -24,8 +24,18 @@ const shoesManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    updateShoes: builder.mutation({
+      query: (arg) => ({
+        url: `/update-shoe/${arg._id}`,
+        method: "PUT",
+        body: arg,
+      }),
+    }),
   }),
 });
 
-export const { useCreateShoesMutation, useGetAllShoesQuery } =
-  shoesManagementApi;
+export const {
+  useCreateShoesMutation,
+  useGetAllShoesQuery,
+  useUpdateShoesMutation,
+} = shoesManagementApi;

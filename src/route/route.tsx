@@ -7,6 +7,7 @@ import Register from "../pages/Register";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 import CreateShoes from "../pages/shoes/CreateShoes";
 import ShoesManagement from "../pages/user/ShoesManagement";
+import UpdateShoes from "../pages/shoes/UpdateShoes";
 
 const router = createBrowserRouter([
   // {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "salesManagement",
         element: <SalesManagement />,
+      },
+      {
+        path: "update-shoes",
+        element: <UpdateShoes />,
       },
     ],
   },

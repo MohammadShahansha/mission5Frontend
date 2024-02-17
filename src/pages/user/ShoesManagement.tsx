@@ -1,6 +1,12 @@
-import { Table, TableColumnsType, TableProps } from "antd";
-import { useGetAllShoesQuery } from "../../redux/features/shoesManagement/shoesManagementApi";
+import { Button, Space, Table, TableColumnsType, TableProps } from "antd";
+import {
+  useGetAllShoesQuery,
+  useUpdateShoesMutation,
+} from "../../redux/features/shoesManagement/shoesManagementApi";
 import { TShoesData } from "../../types/shoesData";
+import DeleteIcons from "../../icons/deleteIcons";
+import EditIcon from "../../icons/EditIcon";
+import { Link } from "react-router-dom";
 
 export type TTableData = Pick<
   TShoesData,
@@ -17,7 +23,8 @@ export type TTableData = Pick<
 >;
 const ShoesManagement = () => {
   const { data: shoesData } = useGetAllShoesQuery(undefined);
-  console.log(shoesData);
+  // const [toUpdateDataSendId] = useUpdateShoesMutation();
+  // console.log(shoesData);
   const tableData = shoesData?.data?.map(
     ({
       brand,
@@ -45,6 +52,17 @@ const ShoesManagement = () => {
       _id,
     })
   );
+
+  // const handleUpdate = (data) => {
+  //   const updateData = {
+  //     _id: data._id,
+  //     data: data,
+  //   };
+  //   console.log(updateData._id);
+  //   toUpdateDataSendId(updateData);
+  // };
+  const handleDelete = (value) => {};
+
   const columns: TableColumnsType<TTableData> = [
     {
       title: "Image",
@@ -54,7 +72,7 @@ const ShoesManagement = () => {
         <img
           src={shoesImage}
           alt="Shoe"
-          style={{ width: "50px", borderRadius: "50%" }}
+          style={{ width: "60px", height: "60px", borderRadius: "50%" }}
         />
       ),
       // filters: [
@@ -84,11 +102,63 @@ const ShoesManagement = () => {
     },
     {
       title: "Name",
+      key: "name",
       dataIndex: "name",
     },
     {
       title: "Price",
+      key: "price",
       dataIndex: "price",
+    },
+    {
+      title: "Brand",
+      key: "brand",
+      dataIndex: "brand",
+    },
+    {
+      title: "Size",
+      key: "size",
+      dataIndex: "size",
+    },
+    {
+      title: "Model",
+      key: "model",
+      dataIndex: "model",
+    },
+    {
+      title: "Release Date",
+      key: "date",
+      dataIndex: "releaseDate",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (items) => (
+        <Space size="middle">
+          {/* update Button */}
+          <Link
+            to={{
+              pathname: "/user/update-shoes",
+            }}
+            state={{ shoesData: items }}
+          >
+            <Button
+              className="bg-blue-600 w-10 h-7 pr-2"
+              // onClick={() => handleUpdate(items)}
+            >
+              <EditIcon />
+            </Button>
+          </Link>
+
+          {/* delete button */}
+          <Button
+            className="bg-red-600 w-10 h-7 pr-2"
+            onClick={() => handleDelete(record)}
+          >
+            <DeleteIcons />
+          </Button>
+        </Space>
+      ),
     },
   ];
 
