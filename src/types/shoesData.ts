@@ -10,5 +10,5 @@ export type TShoesData = {
   color: string;
   shoesImage: string;
   _id: string;
-  _v: string;
+  _v?: string;
 };
