@@ -16,6 +16,7 @@ const shoesManagementApi = baseApi.injectEndpoints({
         url: "/get-shoes",
         method: "GET",
       }),
+      providesTags: ["shoes"],
       transformResponse: (response: TResponseRedux<TShoesData[]>) => {
         console.log(response);
         return {
@@ -30,6 +31,15 @@ const shoesManagementApi = baseApi.injectEndpoints({
         method: "PUT",
         body: arg,
       }),
+      invalidatesTags: ["shoes"],
+    }),
+    deleteShoes: builder.mutation({
+      query: (arg) => ({
+        url: `/delete-shoe/${arg._id}`,
+        method: "DELETE",
+        // body: arg,
+      }),
+      invalidatesTags: ["shoes"],
     }),
   }),
 });
@@ -38,4 +48,5 @@ export const {
   useCreateShoesMutation,
   useGetAllShoesQuery,
   useUpdateShoesMutation,
+  useDeleteShoesMutation,
 } = shoesManagementApi;

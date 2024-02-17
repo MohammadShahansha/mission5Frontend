@@ -1,12 +1,14 @@
 import { Button, Space, Table, TableColumnsType, TableProps } from "antd";
 import {
+  useDeleteShoesMutation,
   useGetAllShoesQuery,
-  useUpdateShoesMutation,
 } from "../../redux/features/shoesManagement/shoesManagementApi";
 import { TShoesData } from "../../types/shoesData";
-import DeleteIcons from "../../icons/deleteIcons";
+import DeleteIcons from "../../icons/DeleteIcons";
 import EditIcon from "../../icons/EditIcon";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import { FieldValues, SubmitErrorHandler } from "react-hook-form";
 
 export type TTableData = Pick<
   TShoesData,
@@ -23,8 +25,7 @@ export type TTableData = Pick<
 >;
 const ShoesManagement = () => {
   const { data: shoesData } = useGetAllShoesQuery(undefined);
-  // const [toUpdateDataSendId] = useUpdateShoesMutation();
-  // console.log(shoesData);
+  const [deleteShoe] = useDeleteShoesMutation();
   const tableData = shoesData?.data?.map(
     ({
       brand,
@@ -52,16 +53,11 @@ const ShoesManagement = () => {
       _id,
     })
   );
-
-  // const handleUpdate = (data) => {
-  //   const updateData = {
-  //     _id: data._id,
-  //     data: data,
-  //   };
-  //   console.log(updateData._id);
-  //   toUpdateDataSendId(updateData);
-  // };
-  const handleDelete = (value) => {};
+  const handleDelete: SubmitErrorHandler<FieldValues> = async (value) => {
+    // console.log(value);
+    await deleteShoe(value);
+    toast.success("delete successfully");
+  };
 
   const columns: TableColumnsType<TTableData> = [
     {
@@ -142,10 +138,7 @@ const ShoesManagement = () => {
             }}
             state={{ shoesData: items }}
           >
-            <Button
-              className="bg-blue-600 w-10 h-7 pr-2"
-              // onClick={() => handleUpdate(items)}
-            >
+            <Button className="bg-blue-600 w-10 h-7 pr-2">
               <EditIcon />
             </Button>
           </Link>
@@ -153,7 +146,7 @@ const ShoesManagement = () => {
           {/* delete button */}
           <Button
             className="bg-red-600 w-10 h-7 pr-2"
-            onClick={() => handleDelete(record)}
+            onClick={() => handleDelete(items)}
           >
             <DeleteIcons />
           </Button>
