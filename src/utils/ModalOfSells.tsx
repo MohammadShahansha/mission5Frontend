@@ -5,10 +5,11 @@ import SHInput from "../components/form/SHInput";
 import { TShoesData } from "../types/shoesData";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import SHDatePicker from "../components/form/SHDatePicker";
+import { useCreateSellsHistoryMutation } from "../redux/features/shoesManagement/sellsManagementApi";
+import { toast } from "sonner";
 
-const ModalOfSells = (shoes: TShoesData) => {
-  // console.log(shoe);
-  // const shoeId = shoe._id;
+const ModalOfSells = (shoe: TShoesData) => {
+  const [sellsProduct] = useCreateSellsHistoryMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -17,12 +18,20 @@ const ModalOfSells = (shoes: TShoesData) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Product is selling........");
     const sellProduct = {
-      shoes,
-      sellHistoy: data,
+      quantity: Number(data.quantity),
+      buyer: data.buyer,
+      date: data.date,
+      shoes: shoe._id,
     };
-    console.log(sellProduct);
+    try {
+      await sellsProduct(sellProduct);
+      toast.success("Successfully selled", { id: toastId });
+    } catch (error) {
+      toast.error("Somthing wrong your sell system", { id: toastId });
+    }
   };
   return (
     <>
@@ -33,7 +42,10 @@ const ModalOfSells = (shoes: TShoesData) => {
         Sell
       </Button>
       <Modal title="Basic Modal" open={isModalOpen} onCancel={handleCancel}>
-        <SHForm onSubmit={onSubmit}>
+        <SHForm
+          onSubmit={onSubmit}
+          // resolver={zodResolver(sellsValidationSchema)}
+        >
           <SHInput type="text" name="quantity" label="Quantity" />
           <SHInput type="text" name="buyer" label="Buyer Name" />
           <SHDatePicker name="date" label="Date" />

@@ -53,6 +53,7 @@ const ShoesManagement = () => {
       _id,
     })
   );
+  console.log(tableData);
   const handleDelete: SubmitErrorHandler<FieldValues> = async (value) => {
     // console.log(value);
     await deleteShoe(value);
