@@ -139,18 +139,28 @@ const ShoesManagement = () => {
             }}
             state={{ shoesData: items }}
           >
-            <Button className="bg-blue-600 w-10 h-7 pr-2">
+            <Button className="flex items-center bg-[#00abf0] font-semibold hover:bg-[#081b29] hover:text-white">
               <EditIcon />
             </Button>
           </Link>
 
           {/* delete button */}
           <Button
-            className="bg-red-600 w-10 h-7 pr-2"
+            className="bg-red-600 flex items-center hover:bg-red-800 "
             onClick={() => handleDelete(items)}
           >
             <DeleteIcons />
           </Button>
+          <Link
+            to={{
+              pathname: "/user/duplicate-shoes",
+            }}
+            state={{ shoesData: items }}
+          >
+            <Button className=" flex items-center bg-[#00abf0] font-semibold hover:bg-[#081b29] hover:text-white">
+              Duplicate & Edit
+            </Button>
+          </Link>
         </Space>
       ),
     },

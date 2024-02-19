@@ -8,6 +8,7 @@ import ProtectedRoute from "../components/layout/ProtectedRoute";
 import CreateShoes from "../pages/shoes/CreateShoes";
 import ShoesManagement from "../pages/user/ShoesManagement";
 import UpdateShoes from "../pages/shoes/UpdateShoes";
+import DuplicateOrEditShoes from "@/pages/shoes/DuplicateOrEditShoes";
 
 const router = createBrowserRouter([
   // {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "update-shoes",
         element: <UpdateShoes />,
+      },
+      {
+        path: "duplicate-shoes",
+        element: <DuplicateOrEditShoes />,
       },
     ],
   },

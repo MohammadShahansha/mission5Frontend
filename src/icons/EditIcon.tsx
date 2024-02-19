@@ -1,7 +1,7 @@
 const EditIcon = () => {
   return (
     <svg
-      className="size-5 text-white"
+      className="size-5 font-semibold hover:bg-[#081b29] hover:text-white"
       data-slot="icon"
       fill="none"
       strokeWidth="1.5"
