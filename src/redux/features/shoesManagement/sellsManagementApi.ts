@@ -8,10 +8,11 @@ const sellsManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["sells"],
     }),
     getAllSellsHistory: builder.query({
-      query: () => ({
-        url: "/get-sells-history",
+      query: (interval) => ({
+        url: `/get-sells-history?interval=${interval}`,
         method: "GET",
       }),
       providesTags: ["sells"],

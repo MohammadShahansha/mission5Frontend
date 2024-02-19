@@ -1,14 +1,17 @@
 import { Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllSellsHistoryQuery } from "../../redux/features/shoesManagement/sellsManagementApi";
 import { TSellsData } from "../../types/sellsData";
+import DropdownFilter from "@/utils/DropdownFilter";
+import { useState } from "react";
 
 export type TTableData = Pick<
   TSellsData,
   "quantity" | "buyer" | "date" | "shoes" | "_id"
 >;
 const SalesHistory = () => {
-  const { data: selsData } = useGetAllSellsHistoryQuery(undefined);
-  console.log(selsData);
+  const [interval, setInterval] = useState("");
+  console.log(interval);
+  const { data: selsData } = useGetAllSellsHistoryQuery(interval);
   const tableData = selsData?.data?.map(
     ({ quantity, date, buyer, shoes, _id }: TSellsData) => ({
       quantity,
@@ -24,7 +27,6 @@ const SalesHistory = () => {
       _id,
     })
   );
-  console.log(tableData);
 
   const columns: TableColumnsType<TTableData> = [
     {
@@ -108,33 +110,6 @@ const SalesHistory = () => {
       key: "date",
       dataIndex: "date",
     },
-    // {
-    //   title: "Action",
-    //   key: "action",
-    //   render: (items) => (
-    //     <Space size="middle">
-    //       {/* update Button */}
-    //       <Link
-    //         to={{
-    //           pathname: "/user/update-shoes",
-    //         }}
-    //         state={{ shoesData: items }}
-    //       >
-    //         <Button className="bg-blue-600 w-10 h-7 pr-2">
-    //           <EditIcon />
-    //         </Button>
-    //       </Link>
-
-    //       {/* delete button */}
-    //       <Button
-    //         className="bg-red-600 w-10 h-7 pr-2"
-    //         onClick={() => handleDelete(items)}
-    //       >
-    //         <DeleteIcons />
-    //       </Button>
-    //     </Space>
-    //   ),
-    // },
   ];
 
   const onChange: TableProps<TTableData>["onChange"] = (
@@ -145,7 +120,13 @@ const SalesHistory = () => {
   ) => {
     console.log("params", pagination, filters, sorter, extra);
   };
-  return <Table columns={columns} dataSource={tableData} onChange={onChange} />;
+
+  return (
+    <>
+      <DropdownFilter interval={interval} setInterval={setInterval} />
+      <Table columns={columns} dataSource={tableData} onChange={onChange} />
+    </>
+  );
 };
 
 export default SalesHistory;

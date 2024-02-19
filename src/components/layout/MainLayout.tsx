@@ -16,7 +16,9 @@ const MainLayout = () => {
       <SiderOfSidebar />
       <Layout>
         <Header style={{ padding: 0 }}>
-          <Button onClick={handlelogout}>Logout</Button>
+          <Button onClick={handlelogout} className="text-white">
+            Logout
+          </Button>
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
