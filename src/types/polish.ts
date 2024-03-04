@@ -1,0 +1,15 @@
+import { TSellsData } from "./sellsData";
+
+export type TShoe = {
+  quantity: number;
+  date: Date;
+  buyer: string;
+  shoesImage: string;
+  name: string;
+  _id: string;
+};
+
+export type TRequestedProduct = {
+  status: string;
+  requestedProduct: TSellsData;
+};

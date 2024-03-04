@@ -1,38 +1,58 @@
+import { selectCorrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { buyerPath } from "@/route/buyerPath";
+import { userPath } from "@/route/userPath";
+import { sidebarItemGenerator } from "@/utils/sidebarGenerator";
 import { Layout, Menu } from "antd";
-import { NavLink } from "react-router-dom";
 const { Sider } = Layout;
 
-const barItems = [
-  {
-    key: "Dashboard",
-    label: "Dashboard",
-  },
-  {
-    key: "Shoes Management",
-    label: "Shoes Management",
-    children: [
-      {
-        key: "create shoes",
-        label: <NavLink to="/user/create-shoes">Create Shoes</NavLink>,
-      },
-      {
-        key: "get shoes",
-        label: <NavLink to="/user/shoes-management">Shoes Management</NavLink>,
-      },
-      {
-        key: "Sales Management",
-        label: <NavLink to="/user/salesManagement">Sales Management</NavLink>,
-      },
-    ],
-  },
+// const barItems = [
+//   {
+//     key: "Dashboard",
+//     label: "Dashboard",
+//   },
+//   {
+//     key: "Shoes Management",
+//     label: "Shoes Management",
+//     children: [
+//       {
+//         key: "create shoes",
+//         label: <NavLink to="/user/create-shoes">Create Shoes</NavLink>,
+//       },
+//       {
+//         key: "get shoes",
+//         label: <NavLink to="/user/shoes-management">Shoes Management</NavLink>,
+//       },
+//       {
+//         key: "Sales Management",
+//         label: <NavLink to="/user/salesManagement">Sales Management</NavLink>,
+//       },
+//     ],
+//   },
 
-  {
-    key: "Sale History",
-    label: <NavLink to="salesHistory">Sales History</NavLink>,
-  },
-];
+//   {
+//     key: "Sale History",
+//     label: <NavLink to="salesHistory">Sales History</NavLink>,
+//   },
+// ];
+const userRole = {
+  USER: "user",
+  BUYER: "buyer",
+};
 
 const SiderOfSidebar = () => {
+  const user = useAppSelector(selectCorrentUser);
+  let sidebarItems;
+  switch (user!.role) {
+    case userRole.USER:
+      sidebarItems = sidebarItemGenerator(userPath, userRole.USER);
+      break;
+    case userRole.BUYER:
+      sidebarItems = sidebarItemGenerator(buyerPath, userRole.BUYER);
+      break;
+    default:
+      break;
+  }
   return (
     <Sider
       breakpoint="lg"
@@ -61,7 +81,7 @@ const SiderOfSidebar = () => {
         theme="dark"
         mode="inline"
         defaultSelectedKeys={["4"]}
-        items={barItems}
+        items={sidebarItems}
       />
     </Sider>
   );
