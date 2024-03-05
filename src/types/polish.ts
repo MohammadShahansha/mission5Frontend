@@ -12,4 +12,5 @@ export type TShoe = {
 export type TRequestedProduct = {
   status: string;
   requestedProduct: TSellsData;
+  _id: string;
 };

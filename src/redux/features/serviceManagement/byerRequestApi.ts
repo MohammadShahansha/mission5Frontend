@@ -15,8 +15,16 @@ const serviceManagementApi = baseApi.injectEndpoints({
         url: `/get-polish-request`,
         method: "GET",
       }),
+      providesTags: ["request"],
     }),
-
+    updatePolishStatus: builder.mutation({
+      query: (arg) => ({
+        url: `/update-request-status/${arg._id}`,
+        method: "PUT",
+        body: arg,
+      }),
+      invalidatesTags: ["request"],
+    }),
     getAllBuyerData: builder.query({
       query: () => ({
         url: `/buyer-request`,
@@ -29,5 +37,6 @@ const serviceManagementApi = baseApi.injectEndpoints({
 export const {
   useCreatePolishRequestMutation,
   useGetAllPolishRequsetQuery,
+  useUpdatePolishStatusMutation,
   useGetAllBuyerDataQuery,
 } = serviceManagementApi;

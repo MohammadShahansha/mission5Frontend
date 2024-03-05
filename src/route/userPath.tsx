@@ -5,6 +5,7 @@ import Dashboard from "@/pages/user/Dashboard";
 import SalesHistory from "@/pages/user/SalesHistory";
 import SalesManagement from "@/pages/user/SalesManagement";
 import ShoesManagement from "@/pages/user/ShoesManagement";
+import Polish from "@/pages/user/services/Polish";
 
 export const userPath = [
   {
@@ -46,6 +47,16 @@ export const userPath = [
     name: "Sells History",
     path: "salesHistory",
     element: <SalesHistory />,
+  },
+  {
+    name: "Service Management",
+    children: [
+      {
+        name: "Polish",
+        path: "update-polish-request",
+        element: <Polish />,
+      },
+    ],
   },
 ];
 

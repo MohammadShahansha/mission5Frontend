@@ -1,14 +1,16 @@
 import { useGetAllPolishRequsetQuery } from "@/redux/features/serviceManagement/byerRequestApi";
 import { TRequestedProduct } from "@/types/polish";
-import { Button, Card } from "antd";
+import ModalOfUpdateRequest from "@/utils/ModalOfUpdateRequest";
+import { Card } from "antd";
 
-const SeePolishRequestUpdate = () => {
+const Polish = () => {
   const { data: polishRequestData } = useGetAllPolishRequsetQuery(undefined);
   console.log(polishRequestData?.data);
   const productData = polishRequestData?.data?.map(
-    ({ requestedProduct, status }: TRequestedProduct) => ({
+    ({ requestedProduct, status, _id }: TRequestedProduct) => ({
       requestedProduct,
       status,
+      _id,
     })
   );
   console.log(productData);
@@ -27,9 +29,7 @@ const SeePolishRequestUpdate = () => {
         >
           <div>
             <div className="flex items-center gap-1">
-              <Button className="bg-[#00abf0] px-5 font-semibold hover:bg-[#081b29] hover:text-white">
-                {product.status}
-              </Button>
+              <ModalOfUpdateRequest {...product} />
             </div>
             <div className="flex items-center gap-1">
               {/* <h3>Price:</h3>
@@ -42,4 +42,4 @@ const SeePolishRequestUpdate = () => {
   );
 };
 
-export default SeePolishRequestUpdate;
+export default Polish;
