@@ -9,7 +9,6 @@ import EditIcon from "../../icons/EditIcon";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { FieldValues, SubmitErrorHandler } from "react-hook-form";
-
 export type TTableData = Pick<
   TShoesData,
   | "brand"
@@ -23,6 +22,7 @@ export type TTableData = Pick<
   | "size"
   | "style"
 >;
+
 const ShoesManagement = () => {
   const { data: shoesData } = useGetAllShoesQuery(undefined);
   const [deleteShoe] = useDeleteShoesMutation();
@@ -39,19 +39,21 @@ const ShoesManagement = () => {
       style,
       shoesImage,
       _id,
-    }) => ({
-      brand,
-      color,
-      model,
-      name,
-      price,
-      quantity,
-      releaseDate,
-      size,
-      style,
-      shoesImage,
-      _id,
-    })
+    }) => {
+      return {
+        brand,
+        color,
+        model,
+        name,
+        price,
+        quantity,
+        releaseDate,
+        size,
+        style,
+        shoesImage,
+        _id,
+      };
+    }
   );
   console.log(tableData);
   const handleDelete: SubmitErrorHandler<FieldValues> = async (value) => {
@@ -106,6 +108,11 @@ const ShoesManagement = () => {
       title: "Price",
       key: "price",
       dataIndex: "price",
+    },
+    {
+      title: "Quantity",
+      key: "quantity",
+      dataIndex: "quantity",
     },
     {
       title: "Brand",

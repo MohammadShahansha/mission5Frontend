@@ -30,6 +30,7 @@ const serviceManagementApi = baseApi.injectEndpoints({
         url: `/buyer-request`,
         method: "GET",
       }),
+      providesTags: ["request"],
     }),
   }),
 });

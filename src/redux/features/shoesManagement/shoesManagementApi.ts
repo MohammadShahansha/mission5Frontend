@@ -10,6 +10,7 @@ const shoesManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["shoes"],
     }),
     getAllShoes: builder.query({
       query: () => ({

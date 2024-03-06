@@ -1,7 +1,7 @@
 import { TShoesData } from "./shoesData";
 
 export type TSellsData = {
-  quantity: number;
+  quantity?: number;
   date: string;
   buyer: string;
   shoes: TShoesData;

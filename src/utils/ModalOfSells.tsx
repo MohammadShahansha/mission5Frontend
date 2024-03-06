@@ -7,10 +7,16 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import SHDatePicker from "../components/form/SHDatePicker";
 import { useCreateSellsHistoryMutation } from "../redux/features/shoesManagement/sellsManagementApi";
 import { toast } from "sonner";
+import {
+  useGetAllShoesQuery,
+  useUpdateShoesMutation,
+} from "@/redux/features/shoesManagement/shoesManagementApi";
 
 const ModalOfSells = (shoe: TShoesData) => {
   const [sellsProduct] = useCreateSellsHistoryMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [toUpdateQuantity] = useUpdateShoesMutation();
+  const { refetch: refetchShoesData } = useGetAllShoesQuery(undefined);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -18,6 +24,7 @@ const ModalOfSells = (shoe: TShoesData) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Product is selling........");
     const sellProduct = {
@@ -31,6 +38,17 @@ const ModalOfSells = (shoe: TShoesData) => {
       toast.success("Successfully selled", { id: toastId });
     } catch (error) {
       toast.error("Somthing wrong your sell system", { id: toastId });
+    }
+    const updateQuantity = {
+      quantity: shoe.quantity - sellProduct.quantity,
+      _id: shoe._id,
+    };
+    console.log(updateQuantity);
+    try {
+      await toUpdateQuantity(updateQuantity);
+      refetchShoesData();
+    } catch (erre) {
+      toast.error("Somthing error when quantity updated from modal of sell");
     }
   };
   return (

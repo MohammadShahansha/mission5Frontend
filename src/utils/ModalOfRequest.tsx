@@ -26,6 +26,7 @@ const ModalOfRequest = (shoe: TShoe) => {
       status: data.status,
       requestedProduct: shoe._id,
     };
+    console.log(requestedProducts);
     try {
       await sendPolishRequest(requestedProducts);
       toast.success("Successfully send a request", { id: toastId });
