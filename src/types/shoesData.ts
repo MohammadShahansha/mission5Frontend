@@ -1,5 +1,6 @@
 export type TShoesData = {
   name: string;
+  id: string;
   price: number;
   quantity: number;
   releaseDate: string;

@@ -15,6 +15,7 @@ export type TTableData = Pick<
   | "color"
   | "model"
   | "name"
+  | "id"
   | "price"
   | "quantity"
   | "releaseDate"
@@ -32,6 +33,7 @@ const ShoesManagement = () => {
       color,
       model,
       name,
+      id,
       price,
       quantity,
       releaseDate,
@@ -45,6 +47,7 @@ const ShoesManagement = () => {
         color,
         model,
         name,
+        id,
         price,
         quantity,
         releaseDate,
@@ -118,6 +121,11 @@ const ShoesManagement = () => {
       title: "Brand",
       key: "brand",
       dataIndex: "brand",
+    },
+    {
+      title: "Id",
+      key: "id",
+      dataIndex: "id",
     },
     {
       title: "Size",

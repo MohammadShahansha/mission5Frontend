@@ -32,12 +32,12 @@ export const userPath = [
         element: <SalesManagement />,
       },
       {
-        name: "Update Shoes",
+        // name: "Update Shoes",
         path: "update-shoes",
         element: <UpdateShoes />,
       },
       {
-        name: "Duplicate Shoes",
+        // name: "Duplicate Shoes",
         path: "duplicate-shoes",
         element: <DuplicateOrEditShoes />,
       },

@@ -6,6 +6,7 @@ export type TShoe = {
   buyer: string;
   shoesImage: string;
   name: string;
+  id: string;
   _id: string;
 };
 

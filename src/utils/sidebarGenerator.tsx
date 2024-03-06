@@ -18,21 +18,23 @@ export const sidebarItemGenerator = (items: TUserPath[], role: string) => {
   const sidebarItem = items.reduce((acc: TUserSidebar[], item) => {
     if (item.path && item.element) {
       acc.push({
-        key: item.name,
+        key: item?.name,
         label: <NavLink to={`/${role}/${item.path}`}>{item.name}</NavLink>,
       });
     }
     if (item.children) {
       acc.push({
-        key: item.name,
+        key: item?.name,
         label: item.name,
         children: item.children.map((child) => ({
           key: child.name,
-          label:
-            child.path !== "update-shoes" &&
-            child.path !== "duplicate-shoes" ? (
-              <NavLink to={`/${role}/${child.path}`}>{child.name}</NavLink>
-            ) : null,
+          // label:
+          //   child.path !== "verifiedData" &&
+          //   child.path !== "update-shoes" &&
+          //   child.path !== "duplicate-shoes" ? (
+          //     <NavLink to={`/${role}/${child.path}`}>{child.name}</NavLink>
+          //   ) : null,
+          label: <NavLink to={`/${role}/${child.path}`}>{child.name}</NavLink>,
         })),
       });
     }

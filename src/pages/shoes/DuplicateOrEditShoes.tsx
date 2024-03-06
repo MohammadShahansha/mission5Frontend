@@ -22,6 +22,7 @@ const DuplicateOrEditShoes = () => {
     console.log("values", values);
     const {
       name,
+      id,
       price,
       quantity,
       releaseDate,
@@ -35,6 +36,7 @@ const DuplicateOrEditShoes = () => {
     } = values;
     const allShoesDataWithCorrectFormate = {
       name,
+      id,
       price: Number(price),
       quantity: Number(quantity),
       releaseDate,
@@ -65,6 +67,7 @@ const DuplicateOrEditShoes = () => {
           resolver={zodResolver(shoesValidationSchema)}
         >
           <SHInput type="text" name="name" label="Name" />
+          <SHInput type="text" name="id" label="Id" />
           <SHInput type="text" name="price" label="Price" />
           <SHInput type="text" name="quantity" label="Quantity" />
           <SHInput type="text" name="releaseDate" label="ReleaseDate" />

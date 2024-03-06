@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const shoesValidationSchema = z.object({
   name: z.string({ required_error: "This feild is required" }),
+  id: z.string({ required_error: "This feild is required" }),
   price: z.string({ required_error: "This feild is required" }),
   quantity: z.string({ required_error: "This feild is required" }),
   releaseDate: z.string({ required_error: "This feild is required" }),

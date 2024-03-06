@@ -12,13 +12,14 @@ const SendRequest = () => {
       quantity,
       date,
       buyer,
-      brand: shoes.brand,
-      name: shoes.name,
-      shoesImage: shoes.shoesImage,
-      color: shoes.color,
-      price: shoes.price,
-      model: shoes.model,
-      size: shoes.size,
+      brand: shoes?.brand,
+      name: shoes?.name,
+      id: shoes?.id,
+      shoesImage: shoes?.shoesImage,
+      color: shoes?.color,
+      price: shoes?.price,
+      model: shoes?.model,
+      size: shoes?.size,
       _id,
     })
   );
@@ -37,8 +38,8 @@ const SendRequest = () => {
               <p className="font-medium text-[#34809f]">{shoe.name}</p>
             </div>
             <div className="flex items-center gap-1">
-              {/* <h3>Price:</h3>
-              <p className="font-medium text-[#34809f]">{shoe.price}</p> */}
+              <h3>Id:</h3>
+              <p className="font-medium text-[#34809f]">{shoe.id}</p>
             </div>
           </div>
           <div className="card-actions justify-end w-full">

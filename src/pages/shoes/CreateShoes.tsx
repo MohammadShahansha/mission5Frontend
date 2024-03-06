@@ -14,6 +14,7 @@ const CreateShoes = () => {
     const toasId = toast.loading("creating......");
     const {
       name,
+      id,
       price,
       quantity,
       releaseDate,
@@ -26,6 +27,7 @@ const CreateShoes = () => {
     } = data;
     const shoesData = {
       name,
+      id,
       price: Number(price),
       quantity: Number(quantity),
       // price,
@@ -62,6 +64,7 @@ const CreateShoes = () => {
           resolver={zodResolver(shoesValidationSchema)}
         >
           <SHInput type="text" name="name" label="Name" />
+          <SHInput type="text" name="id" label="Id" />
           <SHInput type="text" name="price" label="Price" />
           <SHInput type="text" name="quantity" label="Quantity" />
           <SHInput type="text" name="releaseDate" label="ReleaseDate" />

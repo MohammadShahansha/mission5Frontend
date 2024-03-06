@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import { Card } from "antd";
 import ModalOfSells from "../../utils/ModalOfSells";
 import { useGetAllShoesQuery } from "../../redux/features/shoesManagement/shoesManagementApi";
@@ -11,6 +10,7 @@ const SalesManagement = () => {
       color,
       model,
       name,
+      id,
       price,
       quantity,
       releaseDate,
@@ -24,6 +24,7 @@ const SalesManagement = () => {
         color,
         model,
         name,
+        id,
         price,
         quantity,
         releaseDate,
@@ -42,7 +43,7 @@ const SalesManagement = () => {
           className="w-80"
           cover={<img alt="shoe" src={shoe.shoesImage} />}
         >
-          <div>
+          <div className="grid grid-cols-2">
             <div className="flex items-center gap-1">
               <h3>Name:</h3>
               <p className="font-medium text-[#34809f]">{shoe.name}</p>
@@ -55,11 +56,15 @@ const SalesManagement = () => {
               <h3>Quantity:</h3>
               <p className="font-medium text-[#34809f]">{shoe.quantity}</p>
             </div>
+            <div className="flex items-center gap-1">
+              <h3>Id:</h3>
+              <p className="font-medium text-[#34809f]">{shoe.id}</p>
+            </div>
           </div>
           <div className="card-actions justify-end w-full">
-            <Button className="bg-[#00abf0] px-5 w-20 font-semibold hover:bg-[#081b29] hover:text-white">
+            {/* <Button className="bg-[#00abf0] px-5 w-20 font-semibold hover:bg-[#081b29] hover:text-white">
               Detail
-            </Button>
+            </Button> */}
             <ModalOfSells {...shoe} />
           </div>
         </Card>

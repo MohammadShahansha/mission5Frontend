@@ -32,6 +32,13 @@ const serviceManagementApi = baseApi.injectEndpoints({
       }),
       providesTags: ["request"],
     }),
+    getSingleShoe: builder.query({
+      query: (arg) => ({
+        url: `/single-shoe/${arg.id}`,
+        method: "GET",
+      }),
+      providesTags: ["request"],
+    }),
   }),
 });
 
@@ -40,4 +47,5 @@ export const {
   useGetAllPolishRequsetQuery,
   useUpdatePolishStatusMutation,
   useGetAllBuyerDataQuery,
+  useGetSingleShoeQuery,
 } = serviceManagementApi;
