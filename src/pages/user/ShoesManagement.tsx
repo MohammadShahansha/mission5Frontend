@@ -3,12 +3,13 @@ import {
   useDeleteShoesMutation,
   useGetAllShoesQuery,
 } from "../../redux/features/shoesManagement/shoesManagementApi";
-import { TShoesData } from "../../types/shoesData";
+import { TQueryParam, TShoesData } from "../../types/shoesData";
 import DeleteIcons from "../../icons/DeleteIcons";
 import EditIcon from "../../icons/EditIcon";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { FieldValues, SubmitErrorHandler } from "react-hook-form";
+import { useState } from "react";
 export type TTableData = Pick<
   TShoesData,
   | "brand"
@@ -25,7 +26,12 @@ export type TTableData = Pick<
 >;
 
 const ShoesManagement = () => {
-  const { data: shoesData } = useGetAllShoesQuery(undefined);
+  const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
+  const {
+    data: shoesData,
+    isLoading,
+    isFetching,
+  } = useGetAllShoesQuery(params);
   const [deleteShoe] = useDeleteShoesMutation();
   const tableData = shoesData?.data?.map(
     ({
@@ -106,11 +112,19 @@ const ShoesManagement = () => {
       title: "Name",
       key: "name",
       dataIndex: "name",
+      filters: tableData?.map((item) => ({
+        text: item.name,
+        value: item.name,
+      })),
     },
     {
       title: "Price",
       key: "price",
       dataIndex: "price",
+      filters: tableData?.map((item) => ({
+        text: item.price,
+        value: item.price,
+      })),
     },
     {
       title: "Quantity",
@@ -121,6 +135,10 @@ const ShoesManagement = () => {
       title: "Brand",
       key: "brand",
       dataIndex: "brand",
+      filters: tableData?.map((item) => ({
+        text: item.brand,
+        value: item.brand,
+      })),
     },
     {
       title: "Id",
@@ -131,16 +149,46 @@ const ShoesManagement = () => {
       title: "Size",
       key: "size",
       dataIndex: "size",
+      filters: tableData?.map((item) => ({
+        text: item.size,
+        value: item.size,
+      })),
     },
     {
       title: "Model",
       key: "model",
       dataIndex: "model",
+      filters: tableData?.map((item) => ({
+        text: item.model,
+        value: item.model,
+      })),
+    },
+    {
+      title: "Style",
+      key: "style",
+      dataIndex: "style",
+      filters: tableData?.map((item) => ({
+        text: item.style,
+        value: item.style,
+      })),
+    },
+    {
+      title: "Color",
+      key: "color",
+      dataIndex: "color",
+      filters: tableData?.map((item) => ({
+        text: item.color,
+        value: item.color,
+      })),
     },
     {
       title: "Release Date",
       key: "date",
       dataIndex: "releaseDate",
+      filters: tableData?.map((item) => ({
+        text: item.releaseDate,
+        value: item.releaseDate,
+      })),
     },
     {
       title: "Action",
@@ -187,9 +235,48 @@ const ShoesManagement = () => {
     sorter,
     extra
   ) => {
+    if (extra.action === "filter") {
+      const queryParams: TQueryParam[] = [];
+      filters.name?.forEach((item) =>
+        queryParams.push({ name: "name", value: item })
+      );
+      filters.price?.forEach((item) =>
+        queryParams.push({ name: "price", value: item })
+      );
+      filters.brand?.forEach((item) =>
+        queryParams.push({ name: "brand", value: item })
+      );
+      filters.size?.forEach((item) =>
+        queryParams.push({ name: "size", value: item })
+      );
+      filters.model?.forEach((item) =>
+        queryParams.push({ name: "model", value: item })
+      );
+      filters.style?.forEach((item) =>
+        queryParams.push({ name: "style", value: item })
+      );
+      filters.color?.forEach((item) =>
+        queryParams.push({ name: "color", value: item })
+      );
+      filters.releaseDate?.forEach((item) =>
+        queryParams.push({ name: "releaseDate", value: item })
+      );
+      // console.log(queryParams);
+      setParams(queryParams);
+    }
+    if (isLoading) {
+      return <p>loading</p>;
+    }
     console.log("params", pagination, filters, sorter, extra);
   };
-  return <Table columns={columns} dataSource={tableData} onChange={onChange} />;
+  return (
+    <Table
+      loading={isFetching}
+      columns={columns}
+      dataSource={tableData}
+      onChange={onChange}
+    />
+  );
 };
 
 export default ShoesManagement;

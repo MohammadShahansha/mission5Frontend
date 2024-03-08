@@ -26,6 +26,9 @@ const ModalOfSells = (shoe: TShoesData) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Product is selling........");
@@ -80,7 +83,12 @@ const ModalOfSells = (shoe: TShoesData) => {
           Sell
         </Button>
       </div>
-      <Modal title="Basic Modal" open={isModalOpen} onCancel={handleCancel}>
+      <Modal
+        title="Basic Modal"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
         <SHForm
           onSubmit={onSubmit}
           // resolver={zodResolver(sellsValidationSchema)}

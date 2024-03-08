@@ -1,3 +1,5 @@
+import React from "react";
+
 export type TShoesData = {
   name: string;
   id: string;
@@ -12,4 +14,9 @@ export type TShoesData = {
   shoesImage: string;
   _id: string;
   _v?: string;
+};
+
+export type TQueryParam = {
+  name: string;
+  value: boolean | React.Key;
 };

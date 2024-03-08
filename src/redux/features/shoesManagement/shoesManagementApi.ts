@@ -1,5 +1,5 @@
 import { TResponseRedux } from "../../../types/global";
-import { TShoesData } from "../../../types/shoesData";
+import { TQueryParam, TShoesData } from "../../../types/shoesData";
 import { baseApi } from "../../api/baseApi";
 
 const shoesManagementApi = baseApi.injectEndpoints({
@@ -13,10 +13,19 @@ const shoesManagementApi = baseApi.injectEndpoints({
       invalidatesTags: ["shoes"],
     }),
     getAllShoes: builder.query({
-      query: () => ({
-        url: "/get-shoes",
-        method: "GET",
-      }),
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: "/get-shoes",
+          method: "GET",
+          params: params,
+        };
+      },
       providesTags: ["shoes"],
       transformResponse: (response: TResponseRedux<TShoesData[]>) => {
         console.log(response);
