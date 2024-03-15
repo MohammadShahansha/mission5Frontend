@@ -16,13 +16,6 @@ const sellsManagementApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["sells"],
-      //   transformResponse: (response: TResponseRedux<TShoesData[]>) => {
-      //     console.log(response);
-      //     return {
-      //       data: response.data,
-      //       // meta: response.meta,
-      //     };
-      //   },
     }),
   }),
 });

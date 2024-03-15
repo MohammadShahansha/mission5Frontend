@@ -41,7 +41,8 @@ const userRole = {
 };
 
 const SiderOfSidebar = () => {
-  const user = useAppSelector(selectCorrentUser);
+  const user = useAppSelector(selectCorrentUser) as { role: string };
+  console.log(user);
   let sidebarItems;
   switch (user!.role) {
     case userRole.USER:

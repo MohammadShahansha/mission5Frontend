@@ -2,11 +2,10 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import SHForm from "../../components/form/SHForm";
 import SHInput from "../../components/form/SHInput";
 import { Button, Col, Flex } from "antd";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { shoesValidationSchema } from "../../schema/shoesValidationSchema";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import { shoesValidationSchema } from "../../schema/shoesValidationSchema";
 import { useCreateShoesMutation } from "../../redux/features/shoesManagement/shoesManagementApi";
 import { toast } from "sonner";
-
 const CreateShoes = () => {
   const [addShoes] = useCreateShoesMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -25,13 +24,12 @@ const CreateShoes = () => {
       color,
       shoesImage,
     } = data;
+
     const shoesData = {
       name,
       id,
       price: Number(price),
       quantity: Number(quantity),
-      // price,
-      // quantity,
       releaseDate,
       brand,
       model,
@@ -44,12 +42,6 @@ const CreateShoes = () => {
     try {
       const res = await addShoes(shoesData);
       toast.success("shoes created successfully", { id: toasId });
-      // console.log(res.error);
-      // if (res.error) {
-      //   toast.error(res.error.data);
-      // } else {
-      //   toast.success("shoes created");
-      // }
       console.log(res);
     } catch (error) {
       toast.error("somthing wrong", { id: toasId });
@@ -61,7 +53,7 @@ const CreateShoes = () => {
       <Col span={6}>
         <SHForm
           onSubmit={onSubmit}
-          resolver={zodResolver(shoesValidationSchema)}
+          // resolver={zodResolver(shoesValidationSchema)}
         >
           <SHInput type="text" name="name" label="Name" />
           <SHInput type="text" name="id" label="Id" />

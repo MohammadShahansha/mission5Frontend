@@ -6,8 +6,9 @@ import SalesHistory from "@/pages/user/SalesHistory";
 import SalesManagement from "@/pages/user/SalesManagement";
 import ShoesManagement from "@/pages/user/ShoesManagement";
 import Polish from "@/pages/user/services/Polish";
+import { TPath } from "@/types/pathType";
 
-export const userPath = [
+export const userPath: TPath[] = [
   {
     name: "Dashboard",
     path: "dashboard",
@@ -32,12 +33,12 @@ export const userPath = [
         element: <SalesManagement />,
       },
       {
-        // name: "Update Shoes",
+        name: "Update Shoes",
         path: "update-shoes",
         element: <UpdateShoes />,
       },
       {
-        // name: "Duplicate Shoes",
+        name: "Duplicate Shoes",
         path: "duplicate-shoes",
         element: <DuplicateOrEditShoes />,
       },

@@ -1,7 +1,15 @@
-import { Button, Space, Table, TableColumnsType, TableProps } from "antd";
+import {
+  Button,
+  Checkbox,
+  Space,
+  Table,
+  TableColumnsType,
+  TableProps,
+} from "antd";
 import {
   useDeleteShoesMutation,
   useGetAllShoesQuery,
+  useMultipleShoesDeleteMutation,
 } from "../../redux/features/shoesManagement/shoesManagementApi";
 import { TQueryParam, TShoesData } from "../../types/shoesData";
 import DeleteIcons from "../../icons/DeleteIcons";
@@ -27,12 +35,14 @@ export type TTableData = Pick<
 
 const ShoesManagement = () => {
   const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
   const {
     data: shoesData,
     isLoading,
     isFetching,
   } = useGetAllShoesQuery(params);
   const [deleteShoe] = useDeleteShoesMutation();
+  const [deleteMultipleShoe] = useMultipleShoesDeleteMutation();
   const tableData = shoesData?.data?.map(
     ({
       brand,
@@ -60,53 +70,43 @@ const ShoesManagement = () => {
         size,
         style,
         shoesImage,
-        _id,
+        key: _id,
       };
     }
   );
   console.log(tableData);
   const handleDelete: SubmitErrorHandler<FieldValues> = async (value) => {
-    // console.log(value);
+    console.log(value);
     await deleteShoe(value);
     toast.success("delete successfully");
   };
 
+  const selectItem = (selectedKeys: React.Key[]) => {
+    console.log(selectedKeys);
+    setSelectedRowKeys(selectedKeys as string[]);
+  };
+
+  const handleMultipleDelete = async () => {
+    console.log(selectedRowKeys);
+    await deleteMultipleShoe(selectedRowKeys);
+    toast.success("Delete all successful");
+    // Clear the selection
+    setSelectedRowKeys([]);
+  };
+
   const columns: TableColumnsType<TTableData> = [
     {
-      title: "Image",
-      dataIndex: "shoesImage",
-      key: "shoesImage",
-      render: (shoesImage) => (
-        <img
-          src={shoesImage}
-          alt="Shoe"
-          style={{ width: "60px", height: "60px", borderRadius: "50%" }}
+      title: "Select",
+      key: "select",
+      dataIndex: "key",
+      render: (key) => (
+        <Checkbox
+          value={key}
+          onChange={(e) =>
+            selectItem(e.target.checked ? [...selectedRowKeys, key] : [])
+          }
         />
       ),
-      // filters: [
-      //   {
-      //     text: "Joe",
-      //     value: "Joe",
-      //   },
-      //   {
-      //     text: "Jim",
-      //     value: "Jim",
-      //   },
-      //   {
-      //     text: "Submenu",
-      //     value: "Submenu",
-      //     children: [
-      //       {
-      //         text: "Green",
-      //         value: "Green",
-      //       },
-      //       {
-      //         text: "Black",
-      //         value: "Black",
-      //       },
-      //     ],
-      //   },
-      // ],
     },
     {
       title: "Name",
@@ -270,13 +270,34 @@ const ShoesManagement = () => {
     console.log("params", pagination, filters, sorter, extra);
   };
   return (
-    <Table
-      loading={isFetching}
-      columns={columns}
-      dataSource={tableData}
-      onChange={onChange}
-    />
+    <>
+      <Button
+        onClick={handleMultipleDelete}
+        disabled={selectedRowKeys.length === 0}
+      >
+        Delete selected item
+      </Button>
+      <Table
+        loading={isFetching}
+        // rowSelection={rowSelection}
+        columns={columns}
+        dataSource={tableData}
+        onChange={onChange}
+      />
+    </>
   );
 };
 
 export default ShoesManagement;
+// User.deleteMany(
+//   {
+//       age: { $gte: 15 }
+//   }).then(
+//       function () {
+//           // Success
+//           console.log("Data deleted");
+//       }).catch(
+//           function (error) {
+//               // Failure
+//               console.log(error);
+//           });

@@ -43,13 +43,28 @@ const shoesManagementApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["shoes"],
     }),
+    MultipleShoesDelete: builder.mutation({
+      query: (ids) => ({
+        url: `/multipl-shoe-delete`,
+        method: "DELETE",
+        body: { _id: ids },
+      }),
+      invalidatesTags: ["shoes"],
+    }),
     deleteShoes: builder.mutation({
       query: (arg) => ({
-        url: `/delete-shoe/${arg._id}`,
+        url: `/delete-shoe/${arg.key}`,
         method: "DELETE",
         // body: arg,
       }),
       invalidatesTags: ["shoes"],
+    }),
+    getSingleShoe: builder.query({
+      query: (arg) => ({
+        url: `/single-shoe/${arg.id}`,
+        method: "GET",
+      }),
+      providesTags: ["shoes"],
     }),
   }),
 });
@@ -59,4 +74,6 @@ export const {
   useGetAllShoesQuery,
   useUpdateShoesMutation,
   useDeleteShoesMutation,
+  useMultipleShoesDeleteMutation,
+  useGetSingleShoeQuery,
 } = shoesManagementApi;

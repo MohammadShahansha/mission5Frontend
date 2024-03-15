@@ -8,7 +8,6 @@ import {
 } from "../../redux/features/shoesManagement/shoesManagementApi";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
-
 const UpdateShoes = () => {
   const Navigate = useNavigate();
   const location = useLocation();
@@ -30,7 +29,6 @@ const UpdateShoes = () => {
       size,
       color,
       shoesImage,
-      _id,
     } = values;
     const allShoesDataWithCorrectFormate = {
       name,
@@ -46,12 +44,12 @@ const UpdateShoes = () => {
       size,
       color,
       shoesImage,
-      _id,
+      _id: shoesData.key,
     };
     const toastId = toast.loading("Loading....");
     try {
       //   const shoesAllData = { shoesData, ...allShoesDataWithCorrectFormate };
-
+      console.log(allShoesDataWithCorrectFormate);
       await toUpdateData(allShoesDataWithCorrectFormate).unwrap();
       toast.success("Updated successfully", { id: toastId });
       refetchShoesData();

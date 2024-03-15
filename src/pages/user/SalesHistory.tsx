@@ -17,14 +17,14 @@ const SalesHistory = () => {
       quantity,
       date,
       buyer,
-      brand: shoes.brand,
-      name: shoes.name,
-      shoesImage: shoes.shoesImage,
-      color: shoes.color,
-      price: shoes.price,
-      model: shoes.model,
-      size: shoes.size,
-      _id,
+      brand: shoes?.brand,
+      name: shoes?.name,
+      shoesImage: shoes?.shoesImage,
+      color: shoes?.color,
+      price: shoes?.price,
+      model: shoes?.model,
+      size: shoes?.size,
+      key: _id,
     })
   );
 

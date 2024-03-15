@@ -4,35 +4,38 @@ import { useGetAllShoesQuery } from "@/redux/features/shoesManagement/shoesManag
 import { Button, Col, Flex } from "antd";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 const VerifyProduct = () => {
-  //   const [ shoesData ] = useGetSingleShoeQuery(undefined);
   const { data: shoesData } = useGetAllShoesQuery(undefined);
   const shoesId = shoesData?.data?.map(({ id }) => {
     return {
       id,
     };
   });
-  console.log(shoesId);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // if (shoesId?.map((shoeId) => shoeId.id === data.id)) {
-    //   toast.success("verified");
-    // } else {
-    //   toast.error("not verified");
-    // }
-    let i;
-    {
-      shoesId?.map((shoeId) => {
-        if (shoeId.id === data.id) {
-          i = 1;
-        }
-      });
-    }
-    if (i === 1) {
-      toast.success("Your product is varified");
-    } else {
-      toast.error("Ypur Product is not varified");
-    }
+    const toastId = toast.loading("Loading...");
+    shoesId?.forEach((shoeId) => {
+      if (shoeId.id === data.id) {
+        toast.success("Your product is varified", { id: toastId });
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your product is varified",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        toast.error("Your Product is not varified", { id: toastId });
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Your product is not varified",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
   return (
     <Flex justify="center" align="center">
@@ -42,10 +45,12 @@ const VerifyProduct = () => {
           //   resolver={zodResolver(shoesValidationSchema)}
         >
           <SHInput type="text" name="id" label="Id" />
-          <Button htmlType="submit">Submit</Button>
-          {/* <Link to="/buyer/verifiedData">
-            <Button htmlType="submit">Submit</Button>
-          </Link> */}
+          <Button
+            htmlType="submit"
+            className=" bg-[#00abf0] px-5 font-semibold hover:bg-[#081b29] hover:text-white"
+          >
+            Submit
+          </Button>
         </SHForm>
       </Col>
     </Flex>
