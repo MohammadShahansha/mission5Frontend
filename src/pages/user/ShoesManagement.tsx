@@ -112,19 +112,23 @@ const ShoesManagement = () => {
       title: "Name",
       key: "name",
       dataIndex: "name",
-      filters: tableData?.map((item) => ({
-        text: item.name,
-        value: item.name,
-      })),
+      filters: [...new Set(tableData?.map((item) => item.name))].map(
+        (name) => ({
+          text: name,
+          value: name,
+        })
+      ),
     },
     {
       title: "Price",
       key: "price",
       dataIndex: "price",
-      filters: tableData?.map((item) => ({
-        text: item.price,
-        value: item.price,
-      })),
+      filters: [...new Set(tableData?.map((item) => item.price))]
+        .sort((a, b) => a - b)
+        .map((name) => ({
+          text: name,
+          value: name,
+        })),
     },
     {
       title: "Quantity",
@@ -135,10 +139,12 @@ const ShoesManagement = () => {
       title: "Brand",
       key: "brand",
       dataIndex: "brand",
-      filters: tableData?.map((item) => ({
-        text: item.brand,
-        value: item.brand,
-      })),
+      filters: [...new Set(tableData?.map((item) => item.brand))].map(
+        (brand) => ({
+          text: brand,
+          value: brand,
+        })
+      ),
     },
     {
       title: "Id",
@@ -149,46 +155,56 @@ const ShoesManagement = () => {
       title: "Size",
       key: "size",
       dataIndex: "size",
-      filters: tableData?.map((item) => ({
-        text: item.size,
-        value: item.size,
-      })),
+      filters: [...new Set(tableData?.map((item) => item.size))].map(
+        (size) => ({
+          text: size,
+          value: size,
+        })
+      ),
     },
     {
       title: "Model",
       key: "model",
       dataIndex: "model",
-      filters: tableData?.map((item) => ({
-        text: item.model,
-        value: item.model,
-      })),
+      filters: [...new Set(tableData?.map((item) => item.model))].map(
+        (model) => ({
+          text: model,
+          value: model,
+        })
+      ),
     },
     {
       title: "Style",
       key: "style",
       dataIndex: "style",
-      filters: tableData?.map((item) => ({
-        text: item.style,
-        value: item.style,
-      })),
+      filters: [...new Set(tableData?.map((item) => item.style))].map(
+        (style) => ({
+          text: style,
+          value: style,
+        })
+      ),
     },
     {
       title: "Color",
       key: "color",
       dataIndex: "color",
-      filters: tableData?.map((item) => ({
-        text: item.color,
-        value: item.color,
-      })),
+      filters: [...new Set(tableData?.map((item) => item.color))].map(
+        (color) => ({
+          text: color,
+          value: color,
+        })
+      ),
     },
     {
       title: "Release Date",
       key: "date",
       dataIndex: "releaseDate",
-      filters: tableData?.map((item) => ({
-        text: item.releaseDate,
-        value: item.releaseDate,
-      })),
+      filters: [...new Set(tableData?.map((item) => item.releaseDate))].map(
+        (releaseDate) => ({
+          text: releaseDate,
+          value: releaseDate,
+        })
+      ),
     },
     {
       title: "Action",
