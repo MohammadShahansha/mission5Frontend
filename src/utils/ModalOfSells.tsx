@@ -61,17 +61,6 @@ const ModalOfSells = (shoe: TShoesData) => {
     } catch (error) {
       toast.error("Somthing wrong your sell system", { id: toastId });
     }
-    // const updateQuantity = {
-    //   quantity: shoe.quantity - sellProduct.quantity,
-    //   _id: shoe._id,
-    // };
-    // console.log(updateQuantity);
-    // try {
-    //   await toUpdateQuantity(updateQuantity);
-    //   refetchShoesData();
-    // } catch (erre) {
-    //   toast.error("Somthing error when quantity updated from modal of sell");
-    // }
   };
   return (
     <>
@@ -84,7 +73,7 @@ const ModalOfSells = (shoe: TShoesData) => {
         </Button>
       </div>
       <Modal
-        title="Basic Modal"
+        title="Please! give valid information to sell"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}

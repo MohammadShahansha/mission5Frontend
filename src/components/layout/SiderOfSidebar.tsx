@@ -76,7 +76,7 @@ const SiderOfSidebar = () => {
           alignItems: "center",
         }}
       >
-        <h1 style={{}}>PH Uni</h1>
+        <h1 className="text-2xl font-semibold">Shoes Shop</h1>
       </div>
       <Menu
         theme="dark"

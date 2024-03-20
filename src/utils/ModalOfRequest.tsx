@@ -13,7 +13,9 @@ const ModalOfRequest = (shoe: TShoe) => {
   const showModal = () => {
     setIsModalOpen(true);
   };
-
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -42,7 +44,12 @@ const ModalOfRequest = (shoe: TShoe) => {
       >
         Request to Polish
       </Button>
-      <Modal title="Basic Modal" open={isModalOpen} onCancel={handleCancel}>
+      <Modal
+        title="Please Request to Polish"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
         <SHForm
           onSubmit={onSubmit}
           defaultValues={defaultValue}

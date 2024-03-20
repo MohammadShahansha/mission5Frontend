@@ -66,7 +66,12 @@ const CreateShoes = () => {
           <SHInput type="text" name="size" label="Size" />
           <SHInput type="text" name="color" label="Color" />
           <SHInput type="text" name="shoesImage" label="Image" />
-          <Button htmlType="submit">Submit</Button>
+          <Button
+            htmlType="submit"
+            className="bg-[#00abf0] px-5  font-semibold hover:bg-[#081b29] hover:text-white"
+          >
+            Submit
+          </Button>
         </SHForm>
       </Col>
     </Flex>

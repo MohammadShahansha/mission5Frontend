@@ -57,7 +57,11 @@ const ModalOfUpdateRequest = (product: TRequestedProduct) => {
       >
         Update Progress
       </Button>
-      <Modal title="Basic Modal" open={isModalOpen} onCancel={handleCancel}>
+      <Modal
+        title="Please! Update your progress"
+        open={isModalOpen}
+        onCancel={handleCancel}
+      >
         <SHForm
           onSubmit={onSubmit}
           //   defaultValues={defaultValue}

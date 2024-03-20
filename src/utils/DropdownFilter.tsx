@@ -2,13 +2,17 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-const DropdownFilter = ({ interval, setInterval }) => {
+
+type TDroudownFilter = {
+  interval: string;
+  setInterval: (value: string) => void;
+};
+const DropdownFilter = ({ interval, setInterval }: TDroudownFilter) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

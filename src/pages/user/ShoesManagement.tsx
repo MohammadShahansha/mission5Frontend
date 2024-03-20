@@ -290,6 +290,7 @@ const ShoesManagement = () => {
       <Button
         onClick={handleMultipleDelete}
         disabled={selectedRowKeys.length === 0}
+        className="bg-[#00abf0] px-5  font-semibold hover:bg-[#081b29] hover:text-white"
       >
         Delete selected item
       </Button>
@@ -305,15 +306,3 @@ const ShoesManagement = () => {
 };
 
 export default ShoesManagement;
-// User.deleteMany(
-//   {
-//       age: { $gte: 15 }
-//   }).then(
-//       function () {
-//           // Success
-//           console.log("Data deleted");
-//       }).catch(
-//           function (error) {
-//               // Failure
-//               console.log(error);
-//           });

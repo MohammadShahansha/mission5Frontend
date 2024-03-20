@@ -9,14 +9,16 @@ type TSHSelectProps = {
 
 const SHSelect = ({ label, name, options }: TSHSelectProps) => {
   return (
-    <Controller
-      name={name}
-      render={({ field }) => (
-        <Form.Item label={label}>
-          <Select style={{ width: "100%" }} {...field} options={options} />
-        </Form.Item>
-      )}
-    />
+    <div className="font-medium">
+      <Controller
+        name={name}
+        render={({ field }) => (
+          <Form.Item label={label}>
+            <Select style={{ width: "100%" }} {...field} options={options} />
+          </Form.Item>
+        )}
+      />
+    </div>
   );
 };
 

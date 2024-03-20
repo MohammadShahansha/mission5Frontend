@@ -39,20 +39,25 @@ const VerifyProduct = () => {
   };
   return (
     <Flex justify="center" align="center">
-      <Col span={6}>
-        <SHForm
-          onSubmit={onSubmit}
-          //   resolver={zodResolver(shoesValidationSchema)}
-        >
-          <SHInput type="text" name="id" label="Id" />
-          <Button
-            htmlType="submit"
-            className=" bg-[#00abf0] px-5 font-semibold hover:bg-[#081b29] hover:text-white"
+      <div className="mt-20">
+        <h2 className="text-2xl font-semibold mb-5">
+          Verifiy your product using shoes Id
+        </h2>
+        <Col span={24}>
+          <SHForm
+            onSubmit={onSubmit}
+            //   resolver={zodResolver(shoesValidationSchema)}
           >
-            Submit
-          </Button>
-        </SHForm>
-      </Col>
+            <SHInput type="text" name="id" label="Id" />
+            <Button
+              htmlType="submit"
+              className=" bg-[#00abf0] px-5 font-semibold hover:bg-[#081b29] hover:text-white"
+            >
+              Submit
+            </Button>
+          </SHForm>
+        </Col>
+      </div>
     </Flex>
   );
 };
