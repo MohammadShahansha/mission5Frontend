@@ -1,5 +1,5 @@
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import { Button, Col, Flex } from "antd";
+import { Button, Col, Row } from "antd";
 import { toast } from "sonner";
 import SHForm from "@/components/form/SHForm";
 import SHInput from "@/components/form/SHInput";
@@ -11,8 +11,8 @@ const Register = () => {
   const navigate = useNavigate();
   const roleOptions = [
     {
-      value: "user",
-      label: "user",
+      value: "admin",
+      label: "admin",
     },
     {
       value: "buyer",
@@ -43,8 +43,8 @@ const Register = () => {
   };
 
   return (
-    <Flex justify="center" align="center">
-      <Col span={6} className="mt-20">
+    <Row justify="center" align="middle">
+      <Col span={6} xs={24} sm={18} md={6} className="mt-20">
         <h2 className="text-4xl text-center font-semibold mb-5">
           Please Register!
         </h2>
@@ -70,7 +70,7 @@ const Register = () => {
           </p>
         </SHForm>
       </Col>
-    </Flex>
+    </Row>
   );
 };
 

@@ -214,7 +214,7 @@ const ShoesManagement = () => {
           {/* update Button */}
           <Link
             to={{
-              pathname: "/user/update-shoes",
+              pathname: "/admin/update-shoes",
             }}
             state={{ shoesData: items }}
           >
@@ -232,7 +232,7 @@ const ShoesManagement = () => {
           </Button>
           <Link
             to={{
-              pathname: "/user/duplicate-shoes",
+              pathname: "/admin/duplicate-shoes",
             }}
             state={{ shoesData: items }}
           >

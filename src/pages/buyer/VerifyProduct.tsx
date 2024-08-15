@@ -1,7 +1,7 @@
 import SHForm from "@/components/form/SHForm";
 import SHInput from "@/components/form/SHInput";
 import { useGetAllShoesQuery } from "@/redux/features/shoesManagement/shoesManagementApi";
-import { Button, Col, Flex } from "antd";
+import { Button, Col, Row } from "antd";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
@@ -38,12 +38,12 @@ const VerifyProduct = () => {
     });
   };
   return (
-    <Flex justify="center" align="center">
+    <Row justify="center" align="middle">
       <div className="mt-20">
         <h2 className="text-2xl font-semibold mb-5">
           Verifiy your product using shoes Id
         </h2>
-        <Col span={24}>
+        <Col span={24} className="sm:w-full md:w-1/6">
           <SHForm
             onSubmit={onSubmit}
             //   resolver={zodResolver(shoesValidationSchema)}
@@ -58,7 +58,7 @@ const VerifyProduct = () => {
           </SHForm>
         </Col>
       </div>
-    </Flex>
+    </Row>
   );
 };
 

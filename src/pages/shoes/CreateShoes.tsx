@@ -1,7 +1,7 @@
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import SHForm from "../../components/form/SHForm";
 import SHInput from "../../components/form/SHInput";
-import { Button, Col, Flex } from "antd";
+import { Button, Col, Row } from "antd";
 // import { zodResolver } from "@hookform/resolvers/zod";
 // import { shoesValidationSchema } from "../../schema/shoesValidationSchema";
 import { useCreateShoesMutation } from "../../redux/features/shoesManagement/shoesManagementApi";
@@ -49,8 +49,8 @@ const CreateShoes = () => {
   };
 
   return (
-    <Flex justify="center" align="center">
-      <Col span={6}>
+    <Row justify="center" align="middle">
+      <Col span={6} xs={24} sm={18} md={12} className="sm:w-full">
         <SHForm
           onSubmit={onSubmit}
           // resolver={zodResolver(shoesValidationSchema)}
@@ -74,7 +74,7 @@ const CreateShoes = () => {
           </Button>
         </SHForm>
       </Col>
-    </Flex>
+    </Row>
   );
 };
 

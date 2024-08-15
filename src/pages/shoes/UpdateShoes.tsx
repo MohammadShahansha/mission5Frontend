@@ -1,4 +1,4 @@
-import { Button, Col, Flex } from "antd";
+import { Button, Col, Row } from "antd";
 import SHForm from "../../components/form/SHForm";
 import SHInput from "../../components/form/SHInput";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -53,14 +53,14 @@ const UpdateShoes = () => {
       await toUpdateData(allShoesDataWithCorrectFormate).unwrap();
       toast.success("Updated successfully", { id: toastId });
       refetchShoesData();
-      Navigate("/user/shoes-management");
+      Navigate("/admin/shoes-management");
     } catch (err) {
       toast.error("somthing wrong....");
     }
   };
   return (
-    <Flex justify="center" align="center">
-      <Col span={6}>
+    <Row justify="center" align="middle">
+      <Col span={6} xs={24} sm={18} md={12} className="sm:w-full">
         <SHForm
           onSubmit={onSubmit}
           defaultValues={shoesData}
@@ -81,7 +81,7 @@ const UpdateShoes = () => {
           <Button htmlType="submit">Submit</Button>
         </SHForm>
       </Col>
-    </Flex>
+    </Row>
   );
 };
 

@@ -41,7 +41,7 @@ const Login = () => {
 
   return (
     <Row justify="center" align="middle">
-      <div className="mt-20">
+      <div className="mt-20 sm:w-full md:w-1/4">
         <h2 className="text-4xl text-center font-semibold mb-5">
           Please Login!
         </h2>

@@ -1,4 +1,4 @@
-import { Button, Col, Flex } from "antd";
+import { Button, Col, Row } from "antd";
 import SHForm from "../../components/form/SHForm";
 import SHInput from "../../components/form/SHInput";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -73,8 +73,8 @@ const DuplicateOrEditShoes = () => {
     }
   };
   return (
-    <Flex justify="center" align="center">
-      <Col span={6}>
+    <Row justify="center" align="middle">
+      <Col span={6} xs={24} sm={18} md={12} className="sm:w-full">
         <SHForm
           onSubmit={onSubmit}
           defaultValues={shoesDataWithCorrectForm}
@@ -99,7 +99,7 @@ const DuplicateOrEditShoes = () => {
           <Button htmlType="submit">Submit</Button>
         </SHForm>
       </Col>
-    </Flex>
+    </Row>
   );
 };
 

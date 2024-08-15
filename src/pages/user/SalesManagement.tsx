@@ -36,9 +36,10 @@ const SalesManagement = () => {
     }
   );
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-      {shoesAllData?.map((shoe) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+      {shoesAllData?.map((shoe, index) => (
         <Card
+          key={index}
           hoverable
           className="w-80"
           cover={<img alt="shoe" src={shoe.shoesImage} />}

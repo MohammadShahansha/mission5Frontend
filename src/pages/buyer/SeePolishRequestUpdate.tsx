@@ -13,7 +13,7 @@ const SeePolishRequestUpdate = () => {
   );
   console.log(productData);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
       {productData?.map((product: TRequestedProduct) => (
         <Card
           hoverable

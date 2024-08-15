@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/user",
+    path: "/admin",
     element: (
       <ProtectedRoute>
         <App />
